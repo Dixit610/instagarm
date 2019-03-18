@@ -1,0 +1,27 @@
+<div class="posts">
+  <% @posts.each do |post| %>
+    <section class="post">
+	  <div class="user">
+	    <div class="avatar">
+	    <%= link_to user_path(post.user) do%>
+			<%if post.user.avatar.attached?%>
+				<%= image_tag post.user.avatar%>
+			<%else%>  
+			    <% if post.user.gender == "female"%>
+		        	<%= image_tag 'woman.png'%>
+		        <%else%>
+		        	<%= image_tag "man.png"%>
+		        <%end%>
+	        <%end%>
+        <%end%>
+	    </div>
+	    <%= link_to post.user.username,user_path(post.user),class:"username"%>
+	  </div>
+	  <%= image_tag post.image, class: 'main-image' %>
+	  <div class="description">
+	    <%= post.description %>
+	  </div>
+	</section>
+  <% end %>
+  <%= paginate @posts %>
+</div>
